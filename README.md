@@ -61,7 +61,7 @@ Para iniciar a aplicação Flask localmente, use o comando:
     docker run -p 5000:5000 variant_calling_api
     ```
 
-A API estará acessível em [http://localhost:5000](http://localhost:5000) através de uma interface gráfica:
+A API estará acessível em [http://localhost:5000/annotation](http://localhost:5000/annotation) através de uma interface gráfica:
 
 ![Interface Gráfica](image.png)
 
