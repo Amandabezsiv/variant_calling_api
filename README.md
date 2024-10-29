@@ -49,18 +49,14 @@ Para iniciar a aplicação Flask localmente, use o comando:
 flask run
 ```
 
-Ou, para executar com Docker:
+## Execute em um container Docker:
+1. **Construa a imagem Docker:**
 
-Construa a imagem Docker:
-
-Copiar código:
 ```bash
 docker build -t variant_calling_api .
 ```
 
-Inicie o container:
-
-Copiar código:
+2. **Inicie o container:**
 
 ```bash
 docker run -p 5000:5000 variant_calling_api

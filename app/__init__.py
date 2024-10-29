@@ -80,7 +80,7 @@ def create_app():
     if not os.path.isdir(RESULTS):
         os.makedirs(RESULTS, exist_ok=True)
 
-    @app.route("/")
+    @app.route("/annotation")
     def index():
         return render_template("index.html")
 
