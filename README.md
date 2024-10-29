@@ -30,37 +30,37 @@ A Variant Calling API é uma web API que permite o upload de arquivos `.vcf.gz` 
    cd variant_calling_API
 2. Crie um ambiente virtual (opcional, mas recomendado):
 
-  ```bash
-  python3 -m venv venv
-  source venv/bin/activate  # Linux ou macOS
-  venv\Scripts\activate     # Windows
-  ```
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate  # Linux ou macOS
+    venv\Scripts\activate     # Windows
+    ```
 3. Instale as dependências:
 
-  ```bash
-  pip install -r requirements.txt
-  ```
+    ```bash
+    pip install -r requirements.txt
+    ```
 ## Configuração
 Nenhum diretório precisa ser criado manualmente, pois a própria API se encarrega de configurar os diretórios necessários automaticamente durante o processo.
 
 ## Execução
 Para iniciar a aplicação Flask localmente, use o comando:
-  ```bash
-  flask run
-  ```
+    ```bash
+    flask run
+    ```
 
 ## Execute em um container Docker:
 1. **Construa a imagem Docker:**
 
-  ```bash
-  docker build -t variant_calling_api .
-  ```
+    ```bash
+    docker build -t variant_calling_api .
+    ```
 
 2. **Inicie o container:**
 
-  ```bash
-  docker run -p 5000:5000 variant_calling_api
-  ```
+    ```bash
+    docker run -p 5000:5000 variant_calling_api
+    ```
 
 A API estará acessível em [http://localhost:5000](http://localhost:5000) através de uma interface gráfica:
 
@@ -74,9 +74,9 @@ A API estará acessível em [http://localhost:5000](http://localhost:5000) atrav
 
 Exemplo de uso com curl:
 
-```bash
-curl -F "file=@path/to/your/file.vcf.gz" http://localhost:5000/upload-vcf-gz
-```
+  ```bash
+  curl -F "file=@path/to/your/file.vcf.gz" http://localhost:5000/upload-vcf-gz
+  ```
 
 ## Download dos Resultados
 Após o processamento do arquivo `.vcf.gz`, o endpoint irá retornar um arquivo `results.zip` contendo os arquivos processados em formato `.txt` e `.vcf`.
