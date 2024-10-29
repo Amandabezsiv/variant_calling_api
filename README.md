@@ -14,7 +14,7 @@ A Variant Calling API é uma web API que permite o upload de arquivos `.vcf.gz` 
 
 ## Pré-requisitos
 
-- Python 3.8+
+- Python 3.10+
 - Docker (opcional, caso deseje usar containers)
 - Bibliotecas do Python:
   - Flask
