@@ -32,8 +32,7 @@ A Variant Calling API é uma web API que permite o upload de arquivos `.vcf.gz` 
 
     ```bash
     python3 -m venv venv
-    source venv/bin/activate  # Linux ou macOS
-    venv\Scripts\activate     # Windows
+    source venv/bin/activate  # Linux ou macOS    
     ```
 3. Instale as dependências:
 
