@@ -9,7 +9,7 @@ ANNOVAR_UNZIP_DIR = os.path.join(DATA_DIR, "annovar_unzip/")
 ANNOVAR_DIR = os.path.join(ANNOVAR_UNZIP_DIR, "annovar/")
 HUMAN_DB_DIR = os.path.join(ANNOVAR_DIR, "humandb/")
 UPLOAD_FOLDER = os.path.join(ANNOVAR_DIR, "uploads/")
-SNAKEFILE_PATH = os.path.join("./Snakefile")
+SNAKEFILE_PATH = "./Snakefile"
 RESULTS = os.path.join("./results/")
 OUTPUT_FILE_PATH = os.path.join(RESULTS)
 # Download hashs

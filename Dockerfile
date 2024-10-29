@@ -1,15 +1,16 @@
-FROM python:3.10-slim
+FROM python:3.12
+
+ENV ANNOVAR_URL=https://www.openbioinformatics.org/annovar/download/0wgxR2rIVP/annovar.latest.tar.gz
 
 WORKDIR /app
 
 COPY app/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
 COPY app/ .
 
-COPY Snakefile .
-
-ENV FLASK_APP=main.py
+ENV FLASK_APP=__init__.py
 
 EXPOSE 5000
 

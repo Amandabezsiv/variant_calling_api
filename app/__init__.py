@@ -37,10 +37,11 @@ load_dotenv(".env")
 def create_app():
     # Download annovar
     if not os.path.isdir(DATA_DIR):
+        print("criou data")
         os.makedirs(DATA_DIR, exist_ok=True)
         download_url(
             ANNOVAR_URL,
-            os.path.join(DATA_DIR, "annovar.lastest.tar.gz"),
+            os.path.join(DATA_DIR, "annovar.latest.tar.gz"),
             "annovar.gz",
         )
 
@@ -48,9 +49,9 @@ def create_app():
     if not os.path.isdir(ANNOVAR_UNZIP_DIR):
         os.makedirs(ANNOVAR_UNZIP_DIR, exist_ok=True)
         extract_tar_gz(
-            os.path.join(DATA_DIR, "annovar.lastest.tar.gz"),
+            os.path.join(DATA_DIR, "annovar.latest.tar.gz"),
             ANNOVAR_UNZIP_DIR,
-            "annovar.lastest.tar.gz",
+            "annovar.latest.tar.gz",
         )
 
     # Download db's

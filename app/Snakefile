@@ -1,8 +1,8 @@
 import os
-from app import constants
+import constants
 
 UPLOADS_FOLDER = os.path.join("data", "annovar_unzip", "annovar", "uploads")
-RESULTS_FOLDER = "results"
+RESULTS_FOLDER = os.path.join("results")
 TABLE_ANNOVAR = os.path.join("data", "annovar_unzip", "annovar", "table_annovar.pl")
 HUMAN_DB = os.path.join("data", "annovar_unzip", "annovar", "humandb")
 SAMPLE_NAME = "NIST"
@@ -11,7 +11,7 @@ VCF_FILE_PATH = os.path.join(UPLOADS_FOLDER, f"{SAMPLE_NAME}.vcf.gz")
 ANNOTATED_VCF = os.path.join(RESULTS_FOLDER, f"{SAMPLE_NAME}.hg19_multianno.txt")
 ANNOTATED_VCF_INPUT = os.path.join(RESULTS_FOLDER, f"{SAMPLE_NAME}.avinput")
 ANNOTATED_VCF_VCF = os.path.join(RESULTS_FOLDER, f"{SAMPLE_NAME}.hg19_multianno.vcf")
-
+print(VCF_FILE_PATH)
 rule annotate_variants:
     input:
         vcf=VCF_FILE_PATH
