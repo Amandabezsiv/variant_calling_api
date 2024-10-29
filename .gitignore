@@ -3,6 +3,9 @@ data/
 results/
 annovar/
 annovar.latest.tar.gz
+.snakemake/
+variant_calling_API/
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

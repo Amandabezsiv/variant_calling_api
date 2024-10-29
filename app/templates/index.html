@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Upload VCF</title>
+    <script>
+        function uploadFile() {
+            const fileInput = document.getElementById("fileInput");
+            const formData = new FormData();
+            formData.append("file", fileInput.files[0]);
+
+            const progressBar = document.getElementById("progressBar");
+            progressBar.style.display = "block"; // Mostra a barra de progresso
+
+            fetch("/upload-vcf-gz", {
+                method: "POST",
+                body: formData,
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.blob();
+                }
+                throw new Error("Erro ao fazer upload do arquivo");
+            })
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.style.display = "none";
+                a.href = url;
+                a.download = "output_files.zip"; // Nome do arquivo de saída
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => {
+                alert(error);
+            })
+            .finally(() => {
+                progressBar.style.display = "none"; // Esconde a barra de progresso
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Upload de Arquivo VCF</h1>
+    <input type="file" id="fileInput" accept=".vcf.gz">
+    <button onclick="uploadFile()">Enviar VCF</button>
+    <div id="progressBar" style="display:none;">
+        <progress value="0" max="100"></progress> 
+    </div>
+</body>
+</html>
