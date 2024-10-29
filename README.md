@@ -28,14 +28,14 @@ A Variant Calling API é uma web API que permite o upload de arquivos `.vcf.gz` 
    ```bash
    git clone https://github.com/seu-usuario/variant_calling_API.git
    cd variant_calling_API
-### Crie um ambiente virtual (opcional, mas recomendado):
+2. Crie um ambiente virtual (opcional, mas recomendado):
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate  # Linux ou macOS
 venv\Scripts\activate     # Windows
 ```
-## Instale as dependências:
+3. Instale as dependências:
 
 ```bash
 pip install -r requirements.txt
