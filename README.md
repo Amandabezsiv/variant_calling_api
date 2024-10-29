@@ -1,6 +1,6 @@
 # Variant Calling API
 
-A Variant Calling API é uma web API que permite o upload de arquivos `.vcf.gz` para processamento em um pipeline de bioinformática, utilizando o Snakemake e o ANNOVAR para a anotação de variantes. A API usa a referência **hg19** e carrega automaticamente as bases de dados **"gnomad211_exome"** e **"avsnp138"** para a anotação de variantes ao inicializar. Desenvolvido em Flask, este projeto automatiza o pipeline de anotação e processamento.
+A Variant Calling API é uma web API que permite o upload de arquivos `.vcf.gz` para processamento em um pipeline de bioinformática, utilizando o Snakemake e o ANNOVAR para a anotação de variantes. A API usa a referência **hg19** e carrega automaticamente as bases de dados **"gnomad211_exome"** e **"avsnp138"** para a anotação de variantes ao inicializar. É recomendado usar a API em um ambiente Linux. Desenvolvido em Flask, este projeto automatiza o pipeline de anotação e processamento.
 
 **Nota:** Este projeto utiliza o ANNOVAR para a anotação de variantes. Embora o ANNOVAR seja instalado automaticamente pelo pipeline para este projeto, ele é uma ferramenta de terceiros com restrições de distribuição. Portanto, para usá-lo, é necessário obter a licença adequada para seu ambiente de produção. Mais informações sobre licenciamento estão disponíveis no site oficial: [ANNOVAR](https://annovar.openbioinformatics.org/).
 
@@ -30,37 +30,37 @@ A Variant Calling API é uma web API que permite o upload de arquivos `.vcf.gz` 
    cd variant_calling_API
 2. Crie um ambiente virtual (opcional, mas recomendado):
 
-```bash
-python3 -m venv venv
-source venv/bin/activate  # Linux ou macOS
-venv\Scripts\activate     # Windows
-```
+  ```bash
+  python3 -m venv venv
+  source venv/bin/activate  # Linux ou macOS
+  venv\Scripts\activate     # Windows
+  ```
 3. Instale as dependências:
 
-```bash
-pip install -r requirements.txt
-```
+  ```bash
+  pip install -r requirements.txt
+  ```
 ## Configuração
 Nenhum diretório precisa ser criado manualmente, pois a própria API se encarrega de configurar os diretórios necessários automaticamente durante o processo.
 
 ## Execução
 Para iniciar a aplicação Flask localmente, use o comando:
-```bash
-flask run
-```
+  ```bash
+  flask run
+  ```
 
 ## Execute em um container Docker:
 1. **Construa a imagem Docker:**
 
-```bash
-docker build -t variant_calling_api .
-```
+  ```bash
+  docker build -t variant_calling_api .
+  ```
 
 2. **Inicie o container:**
 
-```bash
-docker run -p 5000:5000 variant_calling_api
-```
+  ```bash
+  docker run -p 5000:5000 variant_calling_api
+  ```
 
 A API estará acessível em [http://localhost:5000](http://localhost:5000) através de uma interface gráfica:
 
