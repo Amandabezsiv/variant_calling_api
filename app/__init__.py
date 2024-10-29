@@ -1,4 +1,3 @@
-# flask/__init__.py
 from flask import (
     Flask,
     request,
@@ -7,6 +6,7 @@ from flask import (
     send_from_directory,
     render_template,
 )
+import time
 import os
 from dotenv import load_dotenv
 from .utils import (
@@ -100,6 +100,7 @@ def create_app():
             if os.listdir(RESULTS):
                 return send_results()
 
+            start_time = time.time()
             try:
                 subprocess.run(
                     [
@@ -111,6 +112,9 @@ def create_app():
                     ],
                     check=True,
                 )
+                end_time = time.time()  # Marca o tempo final
+                elapsed_time = end_time - start_time  # Calcula o tempo decorrido
+                print(f"Pipeline concluído em {elapsed_time:.2f} segundos")
                 return send_results()
 
             except subprocess.CalledProcessError as e:

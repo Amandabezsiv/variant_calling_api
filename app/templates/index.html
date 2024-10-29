@@ -1,54 +1,96 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <title>Upload VCF</title>
-    <script>
-        function uploadFile() {
-            const fileInput = document.getElementById("fileInput");
-            const formData = new FormData();
-            formData.append("file", fileInput.files[0]);
+    <title>Carregamento do Pipeline</title>
+    <style>
+        /* Estilos da barra de carregamento */
+        .progress-container {
+            display: none;
+            width: 100%;
+            background-color: #f3f3f3;
+        }
+        .progress-bar {
+            width: 0;
+            height: 30px;
+            background-color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <h2>Upload do arquivo VCF</h2>
+    <form id="uploadForm">
+        <input type="file" id="fileInput" accept=".vcf.gz" required>
+        <button type="button" onclick="startUpload()">Enviar</button>
+    </form>
 
+    <div class="progress-container" id="progressContainer">
+        <p>Aguarde, o documento está sendo processado...</p>
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <script>
+        function startUpload() {
+            const fileInput = document.getElementById("fileInput").files[0];
+            if (!fileInput) {
+                alert("Selecione um arquivo para enviar.");
+                return;
+            }
+
+            // Configura a barra de progresso
+            document.getElementById("progressContainer").style.display = "block";
             const progressBar = document.getElementById("progressBar");
-            progressBar.style.display = "block"; // Mostra a barra de progresso
+
+            // Tempo estimado em milissegundos
+            const estimatedTime = 351880; // 351.88 segundos em ms
+            const interval = 10; // Atualiza a barra a cada 10ms
+            let progress = 0;
+            
+            // Anima a barra de progresso até o tempo estimado
+            const progressInterval = setInterval(() => {
+                progress += (interval / estimatedTime) * 100;
+                progressBar.style.width = progress + "%";
+
+                // Verifica se a barra chegou a 100%
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                }
+            }, interval);
+
+            // Envia o arquivo para o servidor
+            const formData = new FormData();
+            formData.append("file", fileInput);
 
             fetch("/upload-vcf-gz", {
                 method: "POST",
-                body: formData,
+                body: formData
             })
             .then(response => {
                 if (response.ok) {
-                    return response.blob();
+                    return response.blob();  // Recebe o arquivo como um blob
                 }
-                throw new Error("Erro ao fazer upload do arquivo");
+                throw new Error("Erro ao processar o arquivo.");
             })
             .then(blob => {
+                // Cria uma URL de download temporária para o blob
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement("a");
-                a.style.display = "none";
                 a.href = url;
-                a.download = "output_files.zip"; // Nome do arquivo de saída
+                a.download = "result.zip";  // Nome do arquivo para download
                 document.body.appendChild(a);
                 a.click();
+
+                // Limpeza da URL e da barra de progresso
+                a.remove();
                 window.URL.revokeObjectURL(url);
+                document.getElementById("progressContainer").style.display = "none";
             })
             .catch(error => {
-                alert(error);
-            })
-            .finally(() => {
-                progressBar.style.display = "none"; // Esconde a barra de progresso
+                console.error("Erro na requisição:", error);
+                alert("Erro ao processar o arquivo. Tente novamente.");
             });
         }
     </script>
-</head>
-<body>
-    <h1>Upload de Arquivo VCF</h1>
-    <input type="file" id="fileInput" accept=".vcf.gz">
-    <button onclick="uploadFile()">Enviar VCF</button>
-    <div id="progressBar" style="display:none;">
-        <progress value="0" max="100"></progress> 
-    </div>
 </body>
 </html>
